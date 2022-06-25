@@ -1,0 +1,137 @@
+@extends('master')
+@section('title', 'NFT darbs-view nft')
+
+@section('content')
+
+<section id="view-nft">
+	<div class="profile-wrapper">
+		<div class="profile-content">
+			<div class="profile-info">
+				<div class="info-block">
+					<article class="card">
+					    <div class="inner-card">
+					      	<img src="{{ url($nftinfo->file_path) }}" alt="Bilde" class="card-img">
+					    </div>
+					</article>
+				</div>
+				
+			</div>
+			<div class="nft-list">
+				<div class="user-nft-wprapper">
+					<div class="user-nft-header">
+						<div class="nft-name">
+							<h1>NFT #{{ $nftinfo->name }}</h1>
+						</div>
+						<div class="nft-collection">
+							<h2>Collection: {{ $nftinfo->collection_name }}</h2>
+						</div>
+						<div class="nftinfo-block">
+							<h2>Owner: {{ $nftinfo->owner_name }}</h2>
+						</div>
+						@if ($nftinfo->price)
+						<div class="nftinfo-block">
+							<h2>Price: ${{ $nftinfo->price }}</h2>
+						</div>
+						@endif
+						@if (Auth::check())
+							@if ((Auth::user()->id == $nftinfo->owner) && $nftinfo->price)
+							<div class="nftinfo-block border-top">
+								<form action="{{ url('nft/listing/update/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
+									@csrf
+									<label for="price">Update listing price here:</label>
+									<div class="form-field">
+					                    <input type="text" placeholder="$0.00" id="price" name="price" value="{{ $nftinfo->price }}">
+					                    <button type="submit" class="form-btn">
+						                    {{ __('List NFT') }}
+						                </button>
+					                </div>
+					            </form>
+				                <form action="{{ url('nft/listing/remove/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
+									@csrf
+									<div class="form-field-lenely bad">
+					                    <button type="submit" class="form-btn-lonely bad">
+						                    {{ __('Remove listing') }}
+						                </button>
+					                </div>
+					                <span class="auth-error">@error('transaction') {{$message}} @enderror</span>
+								</form>
+							</div>
+							@elseif (Auth::user()->id == $nftinfo->owner)
+							<div class="nftinfo-block border-top">
+								<form action="{{ url('nft/listing/store/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
+									@csrf
+									<label for="price">List NFT on the marketplace:</label>
+									<div class="form-field">
+					                    <input type="text" placeholder="$0.00" id="price" name="price" value="{{ old('price') }}">
+					                    <button type="submit" class="form-btn">
+						                    {{ __('List NFT') }}
+						                </button>
+					                </div>
+					                <span class="auth-error">@error('price') {{$message}} @enderror</span>
+								</form>
+							</div>
+							@elseif ((Auth::user()->id != $nftinfo->owner) && $nftinfo->price)
+							<div class="nftinfo-block border-top">
+								<form action="{{ url('nft/listing/transaction/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
+									@csrf
+									<div class="form-field-lenely">
+					                    <button type="submit" class="form-btn-lonely">
+						                    {{ __('Purchace for $'.$nftinfo->price) }}
+						                </button>
+					                </div>
+					                <span class="auth-error">@error('transaction') {{$message}} @enderror</span>
+								</form>
+							</div>
+							
+
+							@endif
+						@elseif ($nftinfo->price && !Auth::check())
+
+						<div class="nftinfo-block">
+							<form action="{{ url('nft/listing/transaction/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
+								@csrf
+								<div class="form-field-lonely">
+				                    <button type="submit" class="form-btn-lonely">
+					                    {{ __('Purchace for $'.$nftinfo->price) }}
+					                </button>
+				                </div>
+				                <span class="auth-error">@error('transaction') {{$message}} @enderror</span>
+							</form>
+						</div>
+
+						@endif
+						@if(Session::get('success'))
+			            <div id="form-success-msg">
+			                {{ Session::get('success') }}
+			            </div>
+			            @endif
+			            @if(Session::get('fail'))
+			            <div id="form-fail-msg">
+			                {{ Session::get('fail') }}
+			            </div>
+			            @endif
+			            @if (count($nfthistory) > 0)
+			            <div class="nftinfo-block border-top">
+			            	<h2>NFT order history:</h2>
+							<ul class="nft-history">
+								@foreach ($nfthistory as $record)
+									<li>
+										<div class="nft-history-info">
+											Bought by <a href="{{ url('profile/user/'.$record->user) }}" title="">{{$record->user_name}}</a> for ${{$record->price}}
+										</div>
+										<div class="nft-history-date">
+											{{$record->created_at}}
+										</div>
+									</li>
+								@endforeach
+							</ul>
+						</div>
+						@endif
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@endsection

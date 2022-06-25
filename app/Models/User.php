@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\NFT;
+use App\Models\PurchaceHistory;
+use App\Models\NftListings;
 
 class User extends Authenticatable
 {
@@ -41,4 +44,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function nft() {
+        return $this->hasMany(NFT::class, 'owner');
+    }
+
+    public function nft_listings() {
+        return $this->hasMany(NftListings::class, 'user');
+    }
+
+    public function purchace_history() {
+        return $this->hasMany(NftListings::class, 'user');
+    }
 }
