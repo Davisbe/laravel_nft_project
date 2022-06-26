@@ -36,19 +36,20 @@
 						@if (Auth::check())
 							@if ((Auth::user()->id == $nftinfo->owner) && $nftinfo->price)
 							<div class="nftinfo-block border-top">
+								<h2>Update listing price:</h2>
 								<form action="{{ url('nft/listing/update/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
 									@csrf
-									<label for="price">Update listing price here:</label>
 									<div class="form-field">
 					                    <input type="text" placeholder="$0.00" id="price" name="price" value="{{ $nftinfo->price }}">
 					                    <button type="submit" class="form-btn">
 						                    {{ __('List NFT') }}
 						                </button>
 					                </div>
+					                <span class="auth-error">@error('price') {{$message}} @enderror</span>
 					            </form>
 				                <form action="{{ url('nft/listing/remove/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
 									@csrf
-									<div class="form-field-lenely bad">
+									<div class="form-field-lonely bad">
 					                    <button type="submit" class="form-btn-lonely bad">
 						                    {{ __('Remove listing') }}
 						                </button>
@@ -58,9 +59,9 @@
 							</div>
 							@elseif (Auth::user()->id == $nftinfo->owner)
 							<div class="nftinfo-block border-top">
+								<h2>List NFT on the marketplace:</h2>
 								<form action="{{ url('nft/listing/store/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
 									@csrf
-									<label for="price">List NFT on the marketplace:</label>
 									<div class="form-field">
 					                    <input type="text" placeholder="$0.00" id="price" name="price" value="{{ old('price') }}">
 					                    <button type="submit" class="form-btn">
@@ -74,12 +75,12 @@
 							<div class="nftinfo-block border-top">
 								<form action="{{ url('nft/listing/transaction/'.$nftinfo->id) }}" method="get" accept-charset="utf-8">
 									@csrf
-									<div class="form-field-lenely">
+									<div class="form-field-lonely">
 					                    <button type="submit" class="form-btn-lonely">
 						                    {{ __('Purchace for $'.$nftinfo->price) }}
 						                </button>
 					                </div>
-					                <span class="auth-error">@error('transaction') {{$message}} @enderror</span>
+					                <span class="auth-error">@error('price') {{$message}} @enderror</span>
 								</form>
 							</div>
 							

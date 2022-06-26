@@ -32,6 +32,15 @@ a {
  	justify-content: center;
 }
 
+.border-top {
+	border-top: 2px solid #383838;
+	border-radius: 5px;
+	box-shadow: 0px -4px 3px rgba(56, 56, 56, 0.75);
+}
+
+
+
+
 /* NAVBAR */
 #header {
 	background: #383838;
@@ -293,6 +302,7 @@ a {
 
 
 /* Profile stuff */
+
 #userprofile {
 	width: 100%;
 }
@@ -305,11 +315,18 @@ a {
  	margin: 0;
 }
 
+.img-top-banner {
+	margin: 0;
+	padding: 0;
+}
+
 .img-top-banner img {
 	object-fit: cover;
 	height: 30vh;
 	width: 100%;
 	border-bottom: 1px solid black;
+	margin: 0;
+	padding: 0;
 }
 
 .profile-content {
@@ -325,7 +342,8 @@ a {
 	display: flex;
 	justify-content: start;
 	flex-direction: column;
-	border-right: 1px solid black;
+	border-right: 2px solid #383838;
+	border-bottom-right-radius: 5px;
 	width: 25vw;
 	margin: 5px;
 	padding-right: 5px;
@@ -428,6 +446,13 @@ a {
 	float: right;
 }
 
+
+
+
+
+
+
+
 /* View NFT */
 
 #view-nft {
@@ -461,6 +486,7 @@ a {
 #view-nft .card {
 	overflow: hidden;
 	max-width: 37vh;
+	background-color: #383838;
 }
 
 #view-nft .card-img {
@@ -508,7 +534,7 @@ a {
 	display: block;
 }
 
-#view-nft .form-field-lenely .form-btn-lonely {
+#view-nft .form-field-lonely .form-btn-lonely {
 	width: 100%;
 	padding: 10px;
 	background-color: #e9ffe6;
@@ -520,13 +546,13 @@ a {
 	margin-bottom: 10px;
 }
 
-.border-top {
-	border-top: 1px solid black;
-}
-
 #view-nft .nftinfo-block.border-top {
 	margin-top: 100px;
 	padding-top: 10px;
+}
+
+#view-nft .nftinfo-block.border-top h2 {
+	padding: 5px 5px 10px;
 }
 
 .nft-history {
@@ -554,7 +580,7 @@ a {
 	display: block;
 }
 
-#view-nft .form-field-lenely .form-btn-lonely.bad {
+#view-nft .form-field-lonely .form-btn-lonely.bad {
 	width: 100%;
 	padding: 5px;
 	background-color: #ffe6e6;
@@ -565,4 +591,146 @@ a {
 	margin-top: 10px;
 }
 
+
+
+
+
+/* homepage stuff */
+
+.homepage-section {
+	width: 100%;
+	height: fit-content;
+	background-color: #383838;
+	margin-bottom: 15vh;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.homepage-section.header {
+	width: 100%;
+	height: fit-content;
+	background-image: url("/images/homepage_background.jpg");
+	background-attachment: fixed;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+}
+
+.homepage-section-container {
+	padding-top: 5vh;
+	padding-bottom: 5vh;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.homepage-section.header .homepage-section-container {
+	padding-top: 20vh;
+	padding-bottom: 20vh;
+	text-align: center;
+}
+
+.homepage-section.header .homepage-section-container h1 {
+	font-size: 400%;
+	font-weight: normal;
+	margin-bottom: 20px;
+	color: white;
+	text-shadow: 2px 2px black;
+}
+
+.homepage-section.header .homepage-section-container h2 {
+	font-size: 150%;
+	font-style: italic;
+	font-weight: 200;
+	color: black;
+}
+
+.homepage-section.header .homepage-section-container h3 {
+	font-size: 125%;
+	font-style: italic;
+	font-weight: 200;
+	color: black;
+}
+
+.homepage-section h1 {
+	font-size: 200%;
+	font-weight: 200;
+	color: white;
+}
+
+.homepage-section h2 {
+	font-size: 90%;
+	font-weight: 200;
+	color: white;
+}
+
+#open_collections .user-nft-list {
+	column-gap: 2vw;
+}
+
+#open_collections .user-nft-list h2 {
+	color: white;
+	font-weight: 200;
+	font-size: 100%;
+	text-shadow: 2px 2px black;
+}
+
+#open_collections .user-nft-list article {
+	column-gap: 1vw;
+	background-image: url("/images/homepage_background.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-top: 20px;
+}
+
+.justify-left {
+	align-items: start;
+	text-align: start;
+}
+
+.homepage-section-container .open-collection-buy {
+	width: 45vw;
+	min-width: 470px;
+	padding-left: 1vw;
+	border-left: 2px solid #00e3dd;
+	border-bottom-left-radius: 5px;
+	margin-top: 40px;
+}
+
+#open-collection {
+	margin-top: 100px;
+	color: white;
+}
+
+#open-collection h1 {
+	padding: 5px;
+	border-top: 2px solid #00e3dd;
+	border-bottom: 2px solid #00e3dd;
+	border-radius: 5px;
+}
+
+#open-collection h2 {
+	color: white;
+	font-weight: 200;
+	font-size: 120%;
+	margin-bottom: 20px;
+}
+
+.cool-blue {
+	color:  #00e3dd;
+}
+
+#open-collection .form-field-lonely .form-btn-lonely {
+	width: 100%;
+	padding: 10px;
+	background-color: #e9ffe6;
+	border: 1px solid #00e3dd;
+	border-radius: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 120%;
+	cursor: pointer;
+	margin-bottom: 10px;
+}
 
