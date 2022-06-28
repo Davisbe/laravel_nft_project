@@ -16,10 +16,12 @@
 				<h2>Manage users:</h2>
             	<a href="{{ url('admin/user/manage/users') }}" class="btn-lonely">Manage</a>
 			</div>
+			<!--
 			<div class="dash-section">
 				<h2>Manage collections:</h2>
             	<a href="" class="btn-lonely">Manage</a>
 			</div>
+			-->
 		</div>
 	</div>
 </section>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Collections;
+use App\Models\UpcomingCollections;
 use App\Models\User;
 use App\Models\NftListings;
 use App\Models\NFT;
@@ -17,9 +18,26 @@ class NftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $nfts = NFT::whereNotNull('owner')->get();
+        foreach ($nfts as $nft) {
+            $nft->collection_name = Collections::where('id',$nft->collection_id)->pluck('name')->firstOrFail();
+            $nft->price = NftListings::where('nft',$nft->id)->pluck('price')->first();
+        }
+        $upc_collections = UpcomingCollections::pluck('collection_id')->all();
+        $collections = Collections::whereNotIn('id', $upc_collections)->select('id', 'name')->get();
+
+        if ($request->is_listing) {
+            $listings = NftListings::pluck('nft')->all();
+            $nfts = $nfts->whereIn('id', $listings);
+        }
+
+        if ($request->collections && ($request->collections != 'all')) {
+            $nfts = $nfts->where('collection_id', $request->collections);
+        }
+
+        return view('nft_index', compact('nfts', 'collections'));
     }
 
     /**

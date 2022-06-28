@@ -27,8 +27,9 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
     Route::post('/auth/save', [UserAuth::class, 'save'])->name('auth.save');
     Route::post('/auth/check', [UserAuth::class, 'check'])->name('auth.check');
 
-    Route::resource('nft_resource', NftController::class, ['except' => ['show']]);
+    Route::resource('nft_resource', NftController::class, ['except' => ['show', 'index']]);
     Route::get('nft/show/{id}', [NftController::class, 'show']);
+    Route::get('nft/index', [NftController::class, 'index'])->name('nft.index');
 
     Route::get('nft/listing/store/{id}', [ListingController::class, 'new_listing']);
     Route::get('nft/listing/update/{id}', [ListingController::class, 'update_listing']);

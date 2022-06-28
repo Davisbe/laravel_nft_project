@@ -24,16 +24,8 @@
 
                 <nav id="main-menu">
                     <ul>
-                        <li class="main-button"><a href="{{ url('/') }}" title="">Sakums</a></li>
-                        <li class="main-button"><a href="#rakstiAnchor" title="">test</a></li>
-                        <li class="main-button"><a href="#jaunumiAnchor" title="">test</a></li>
-                        <li class="main-button"><a href="" title="">testtest</a>
-                            <ul class="sub-menu">
-                                <li><button data-popup-target="#contact-popup" type="button">test</button></li>
-                                <li><a href="" title="">test</a></li>
-                            </ul>
-                        <div class="icon collapse">&#9652;</div>
-                        <div class="icon expand">&#9662;</div>
+                        <li class="main-button"><a href="{{ url('/') }}" title="">Home</a></li>
+                        <li class="main-button"><a href="{{route('nft.index')}}" title="">NFTs</a></li>
                         </li>
                     </ul>
                 </nav>
