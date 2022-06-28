@@ -734,3 +734,53 @@ a {
 	margin-bottom: 10px;
 }
 
+.btn-lonely {
+	width: 100%;
+	display: inline-block;
+	text-align: center;
+	background-color: lightgray;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+#admin-dash {
+	margin-top: 100px;
+	color: white;
+}
+
+#admin-dash h2 {
+	font-size: 150%;
+}
+
+.dash-section {
+	padding-bottom: 60px;
+}
+
+.user-table {
+	width: 100%;
+	display: table;
+	border-collapse: collapse;
+}
+
+.user-table th {
+	text-transform: uppercase;
+	background-color: #2e2e2e;
+	padding: 15px 5px 15px;
+}
+
+.user-table td {
+	text-align: center;
+	padding: 10px 5px 10px;
+}
+
+.user-table th, td {
+	border-bottom: 1px solid black;
+}
+
+.user-table tr:nth-child(even) {
+	background-color: #4a4a4a;
+}
+
+#admin-dash .auth-title {
+	font-size: 150%;
+}

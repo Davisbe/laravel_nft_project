@@ -11,6 +11,7 @@
     </div>
 </section>
 
+@if (count($open_collections) > 0)
 <section id="open_collections" class="homepage-section">
     <div class="homepage-section-container">
         <h1>Buy newly released NFTs</h1>
@@ -32,5 +33,6 @@
         </div>
     </div>
 </section>
+@endif
 
 @endsection

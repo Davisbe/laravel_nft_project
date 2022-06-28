@@ -56,6 +56,10 @@ class UserAuth extends Controller
         } else{
             if (Hash::check($request->password, $userinfo->password) and Auth::attempt($credentials)) {
                 $request->session()->put('LoggedUser', $userinfo->id);
+
+                $userinfo->is_active = 1;
+                $userinfo->save();
+
                 return redirect('/');
             } else{
                 return back()->with('fail', 'Incorrect password');
@@ -65,8 +69,13 @@ class UserAuth extends Controller
 
     function logout() {
         if(session()->has('LoggedUser') and Auth::check()) {
-            session()->pull('LoggedUser');
+
+            $user = User::where('id', Auth::user()->id)->firstOrFail();
+            $user->is_active = 0;
+            $user->save();
+
             Auth::logout();
+            session()->pull('LoggedUser');
         }
         return redirect('auth/login');
     }

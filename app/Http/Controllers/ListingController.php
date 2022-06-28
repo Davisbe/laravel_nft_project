@@ -27,7 +27,7 @@ class ListingController extends Controller
             'price'=>$request->price
         ]);
 
-        if (true) {
+        if ($nft) {
             return back()->with('success', 'NFT has been listed!');
         }
         else {

@@ -17,7 +17,8 @@ class NFT extends Model
     protected $fillable = [
         'name',
         'collection_id',
-        'file_path'
+        'file_path',
+        'owner'
     ];
 
     public function collections() {

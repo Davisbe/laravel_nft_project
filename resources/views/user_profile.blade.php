@@ -20,10 +20,18 @@
 				@if(Auth::check() && (Auth::user()->id == $userinfo->id))
 				<div class="info-block">
 					<div class="user-balance">
-						<h2>Balance: </h2>
+						<h2>Balance:</h2>
 						${{ $userinfo->balance }}
 					</div>
 				</div>
+
+					@if (Auth::user()->rank == 'admin')
+						<div class="info-block">
+							<a href="{{url('admin/user/dash')}}" type="button" class="btn-lonely">
+				                {{ __('Open Admin dashboard') }}
+				            </a>
+						</div>
+					@endif
 				@endif
 				
 			</div>

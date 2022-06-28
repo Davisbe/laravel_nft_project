@@ -20,7 +20,6 @@ class UserProfile extends Controller
     {
         //
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -56,7 +55,7 @@ class UserProfile extends Controller
 
         
         foreach ($owned_nfts as $nft) {
-            $nft->collection_name = Collections::findOrFail($nft->collection_id)->pluck('name')->first();
+            $nft->collection_name = Collections::where('id',$nft->collection_id)->pluck('name')->firstOrFail();
             $nft->price = NftListings::where('nft',$nft->id)->pluck('price')->first();
         }
 
