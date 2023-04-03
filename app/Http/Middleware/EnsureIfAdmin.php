@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EnsureIfAdmin
 {
@@ -17,8 +18,11 @@ class EnsureIfAdmin
     public function handle(Request $request, Closure $next)
     {
 
-        
-
-        return $next($request);
+        if (Auth::check() and Auth::user()->admin == 1) {
+            return $next($request);
+        }
+        else {
+            return back();
+        }
     }
 }

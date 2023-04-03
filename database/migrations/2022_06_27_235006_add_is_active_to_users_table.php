@@ -15,6 +15,7 @@ class AddIsActiveToUsersTable extends Migration
     {
         Schema::table('users', function ($table) {
             $table->boolean('is_active')->default(0);
+            $table->boolean('admin')->default(0);
         });
     }
 
@@ -27,6 +28,7 @@ class AddIsActiveToUsersTable extends Migration
     {
         Schema::table('users', function ($table) {
             $table->dropColumn('is_active');
+            $table->dropColumn('admin');
         });
     }
 }
