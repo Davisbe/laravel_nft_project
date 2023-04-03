@@ -44,7 +44,7 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
         Route::get('collection/view/new/purchace/{id}', [CollectionController::class, 'buy_new']);
     });
 
-    Route::group(['middleware'=>['AuthCheck']], function () {
+    Route::group(['middleware'=>['EnsureIfAdmin']], function () {
         Route::get('admin/user/manage/user/destroy/{id}', [AdminController::class, 'user_destroy'])->name('user.destroy');
         Route::get('admin/user/manage/user/update/{id}', [AdminController::class, 'user_update'])->name('user_update');
         Route::get('admin/user/manage/users/{id}', [AdminController::class, 'show_user'])->name('admin.user.show');

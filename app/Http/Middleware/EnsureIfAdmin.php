@@ -18,7 +18,7 @@ class EnsureIfAdmin
     public function handle(Request $request, Closure $next)
     {
 
-        if (Auth::check() and Auth::user()->admin == 1) {
+        if (Auth::check() and Auth::user()->admin == true) {
             return $next($request);
         }
         else {
