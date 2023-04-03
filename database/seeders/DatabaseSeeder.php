@@ -19,12 +19,13 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        User::create([
+        $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@nft.com',
             'password' => bcrypt('KoksIetLielaAnomalijsTree'),
             'admin' => 1,
         ]);
+        $admin->save();
 
         $collection = Collections::create([
             'name' => 'Kernel Gods'
