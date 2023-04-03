@@ -14,7 +14,7 @@ class AddInitialPriceToCollectionsTable extends Migration
     public function up()
     {
         Schema::table('collections', function ($table) {
-            $table->double('initial_price',12,2);
+            $table->double('initial_price',12,2)->default(20.0);
         });
     }
 
