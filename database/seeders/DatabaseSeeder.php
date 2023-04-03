@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Model::unguard();
+        $this->setFKCheckOff();
 
         $admin = User::create([
             'name' => 'Admin',
@@ -92,6 +93,29 @@ class DatabaseSeeder extends Seeder
 
 
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->setFKCheckOn();
+        Model::reguard();
+    }
+
+    private function setFKCheckOff() {
+        switch(DB::getDriverName()) {
+            case 'mysql':
+                DB::statement('SET FOREIGN_KEY_CHECKS=0');
+                break;
+            case 'sqlite':
+                DB::statement('PRAGMA foreign_keys = OFF');
+                break;
+        }
+    }
+
+    private function setFKCheckOn() {
+        switch(DB::getDriverName()) {
+            case 'mysql':
+                DB::statement('SET FOREIGN_KEY_CHECKS=1');
+                break;
+            case 'sqlite':
+                DB::statement('PRAGMA foreign_keys = ON');
+                break;
+        }
     }
 }
