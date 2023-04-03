@@ -21,7 +21,7 @@ class UserAuth extends Controller
         $request->validate([
             'name'=>'required|min:5|max:15',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:8|max:20',
+            'password'=>'required|min:8|max:30',
             'password_confirm'=>'required|in:'.$request->password
         ]);
 
@@ -42,7 +42,7 @@ class UserAuth extends Controller
     function check(Request $request) {
         $request->validate([
             'email'=>'required|email',
-            'password'=>'required|min:8|max:15'
+            'password'=>'required|min:8|max:30'
         ]);
 
         $userinfo = User::where('email','=',$request->email)->first();
