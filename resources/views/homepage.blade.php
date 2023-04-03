@@ -5,9 +5,9 @@
 
 <section id="intro" class="homepage-section header">
     <div class="homepage-section-container">
-        <h1>The NFT Marketplace</h1>
-        <h2>"ha ha the crypto prices crashed, what are you gonna do now?"</h2>
-        <h3>~probably your friends and family</h3>
+        <h1>The En-Ef-Tē Marketplace</h1>
+        <h2>"this one's not a ponzi scheme, pinky promise"</h2>
+        <h3>~Dr. Ponzi</h3>
     </div>
 </section>
 

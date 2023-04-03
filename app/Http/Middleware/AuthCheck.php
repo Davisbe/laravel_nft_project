@@ -21,16 +21,16 @@ class AuthCheck
             return back();
         }
 
-        if (!Auth::check() and ($request->path() == 'auth/logout')) {
-            return back();
-        }
-
         if (!Auth::check() and ($request->is('nft/listing/*'))) {
             return response()->view('login');
         }
 
         if (!Auth::check() and ($request->is('collection/view/new/purchace/*'))) {
             return response()->view('login');
+        }
+        
+        if (!Auth::check()) {
+            return back();
         }
 
         return $next($request);

@@ -42,7 +42,9 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
         Route::get('/auth/logout', [UserAuth::class, 'logout'])->name('auth.logout');
         Route::get('nft/listing/transaction/{id}', [ListingController::class, 'transaction']);
         Route::get('collection/view/new/purchace/{id}', [CollectionController::class, 'buy_new']);
+    });
 
+    Route::group(['middleware'=>['AuthCheck']], function () {
         Route::get('admin/user/manage/user/destroy/{id}', [AdminController::class, 'user_destroy'])->name('user.destroy');
         Route::get('admin/user/manage/user/update/{id}', [AdminController::class, 'user_update'])->name('user_update');
         Route::get('admin/user/manage/users/{id}', [AdminController::class, 'show_user'])->name('admin.user.show');

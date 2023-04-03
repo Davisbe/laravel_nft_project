@@ -69,6 +69,10 @@ class ListingController extends Controller
             if ($listing->price <= $buyer->balance) {
                 $buyer->balance = $buyer->balance - $listing->price;
                 $buyer->save();
+
+                $owner->balance = $owner->balance + $listing->price;
+                $owner->save();
+                
                 $nft->owner = $buyer->id;
                 $nft->save();
 
