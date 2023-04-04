@@ -25,7 +25,7 @@
 					</div>
 				</div>
 
-					@if (Auth::user()->rank == 'admin')
+					@if (Auth::user()->admin == true)
 						<div class="info-block">
 							<a href="{{url('admin/user/dash')}}" type="button" class="btn-lonely">
 				                {{ __('Open Admin dashboard') }}

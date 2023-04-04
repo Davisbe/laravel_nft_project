@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Collections;
 use App\Models\User;
 use App\Models\NftListings;
+use App\Models\Comment;
 
 
 class NFT extends Model
@@ -35,5 +36,9 @@ class NFT extends Model
 
     public function purchace_history() {
         return $this->hasMany(NftListings::class, 'nft');
+    }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'nft_id');
     }
 }

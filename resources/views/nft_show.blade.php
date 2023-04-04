@@ -128,6 +128,67 @@
 							</ul>
 						</div>
 						@endif
+
+						@if (Auth::check())
+						<div class="nftinfo-block" id="comments">
+			            	<h2>Comments</h2>
+							<div class="comment-wrapper-new">
+								<form id="auth-form" accept-charset="utf-8" action="{{ url('comments/'.$nftinfo->id) }}" method="POST">
+									@csrf
+									<div class="form-field">
+										<textarea placeholder="Write comment" name="comment" cols="40" rows="5"></textarea>
+										<span class="auth-error">@error('comment') {{$message}} @enderror</span>
+									</div>
+									<button type="submit" class="form-btn">
+										{{ __('Submit') }}
+									</button>
+								</form>
+							</div>
+
+							@forelse ($nftinfo->comments as $comment)
+							<div class="comment-wrapper">
+								<div class="comment-info">
+
+									<div class="comment-owner">
+										@if ($comment->user)
+											{{ $comment->user->name }}
+										@endif
+									</div>
+									<div class="comment-date">
+										{{ $comment->created_at->format('d-m-y') }}
+									</div>
+
+								</div>
+
+								<div class="comment-body">
+									<p>{{ $comment->body }}</p>
+								</div>
+
+							</div>
+
+							@empty
+							<div class="comment-wrapper">
+								<div class="comment-info">
+
+									<div class="comment-owner">
+									</div>
+									<div class="comment-date">
+									</div>
+
+								</div>
+
+								<div class="comment-body">
+									<p>No comments yet.</p>
+								</div>
+
+							</div>
+							@endforelse
+
+							
+						</div>
+
+						@endif
+
 					</div>
 				</div>
 			</div>

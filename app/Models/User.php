@@ -56,4 +56,8 @@ class User extends Authenticatable
     public function purchace_history() {
         return $this->hasMany(NftListings::class, 'user');
     }
+
+    public function comments() {
+        return $this->hasMany(Comment::class, 'user');
+    }
 }

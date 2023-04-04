@@ -33,9 +33,9 @@ a {
 }
 
 .border-top {
-	border-top: 2px solid #383838;
-	border-radius: 5px;
-	box-shadow: 0px -4px 3px rgba(56, 56, 56, 0.75);
+	border-top: 1px solid #383838;
+	border-top-right-radius: 5px;
+	box-shadow: 2px -2px 3px rgba(56, 56, 56, 0.3);
 }
 
 
@@ -473,7 +473,7 @@ a {
 }
 
 #view-nft .profile-info {
-	justify-content: center;
+	justify-content: right;
 	flex-direction: row;
 }
 
@@ -483,15 +483,20 @@ a {
 	flex-direction: column;
 }
 
+#view-nft .nft-list {
+	width: 50vw;
+	max-width: 80vh;
+}
+
 #view-nft .card {
 	overflow: hidden;
-	max-width: 37vh;
+	max-width: 35vh;
 	background-color: #383838;
 }
 
 #view-nft .card-img {
 	height: auto;
-	width: 35vh;
+	max-width: fit-content;
 	object-fit: scale-down;
 }
 
@@ -537,8 +542,8 @@ a {
 #view-nft .form-field-lonely .form-btn-lonely {
 	width: 100%;
 	padding: 10px;
-	background-color: #e9ffe6;
-	border: 1px solid black;
+	background-color: #87c8d8;
+	border: 1px solid rgb(0, 10, 150);
 	border-radius: 5px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	font-size: 120%;
@@ -589,6 +594,73 @@ a {
 	font-size: 100%;
 	cursor: pointer;
 	margin-top: 10px;
+}
+
+/* Comments in view NFT */
+
+.comment-wrapper {
+	margin: 0 0 10px 0;
+	padding: 0;
+	padding: 1vh ;
+	width: 100%;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	flex-direction: column;
+	border-radius: 5px;
+	border-left: 6px solid rgb(103, 207, 255);
+}
+
+.comment-wrapper-new {
+	margin: 0 0 10px 0;
+	padding: 0;
+	padding: 1vh ;
+	width: 100%;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	flex-direction: column;
+	border-radius: 5px;
+	border-left: 6px solid rgb(45, 127, 160);
+}
+
+.form-field textarea {
+	width: 100%;
+	height: 150px;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 16px;
+	resize: none;
+	font-family: 'Work Sans', sans-serif;
+}
+
+.comment-info {
+	display: flex;
+	justify-content: space-between;
+	padding: 8px;
+	margin-bottom: 3px;
+}
+
+.comment-date {
+	color: gray;
+	font-style: italic;
+	font-size: 90%;
+}
+
+.comment-owner {
+	font-style: italic;
+}
+
+.comment-body {
+	word-wrap: break-word;
+}
+
+.nftinfo-block #auth-form .form-field{
+	display: flex;
+ 	flex-direction: column;
 }
 
 

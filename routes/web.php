@@ -8,6 +8,7 @@ use App\Http\Controllers\ListingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentController;
 
 
 /*
@@ -27,21 +28,22 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
     Route::post('/auth/save', [UserAuth::class, 'save'])->name('auth.save');
     Route::post('/auth/check', [UserAuth::class, 'check'])->name('auth.check');
 
-    Route::resource('nft_resource', NftController::class, ['except' => ['show', 'index']]);
-    Route::get('nft/show/{id}', [NftController::class, 'show']);
-    Route::get('nft/index', [NftController::class, 'index'])->name('nft.index');
-
-    Route::get('nft/listing/store/{id}', [ListingController::class, 'new_listing']);
-    Route::get('nft/listing/update/{id}', [ListingController::class, 'update_listing']);
-    Route::get('nft/listing/remove/{id}', [ListingController::class, 'remove']);
-
 
     Route::group(['middleware'=>['AuthCheck']], function () {
+        Route::resource('nft_resource', NftController::class, ['except' => ['show', 'index']]);
+        Route::get('nft/show/{id}', [NftController::class, 'show']);
+        Route::get('nft/index', [NftController::class, 'index'])->name('nft.index');
+
+        Route::get('nft/listing/store/{id}', [ListingController::class, 'new_listing']);
+        Route::get('nft/listing/update/{id}', [ListingController::class, 'update_listing']);
+        Route::get('nft/listing/remove/{id}', [ListingController::class, 'remove']);
+
         Route::get('/auth/login', [UserAuth::class, 'login']);
         Route::get('/auth/register', [UserAuth::class, 'register']);
         Route::get('/auth/logout', [UserAuth::class, 'logout'])->name('auth.logout');
         Route::get('nft/listing/transaction/{id}', [ListingController::class, 'transaction']);
         Route::get('collection/view/new/purchace/{id}', [CollectionController::class, 'buy_new']);
+        Route::post('comments/{nft_id}', [CommentController::class, 'store']);
     });
 
     Route::group(['middleware'=>['EnsureIfAdmin']], function () {

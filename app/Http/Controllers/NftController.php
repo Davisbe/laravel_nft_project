@@ -69,7 +69,7 @@ class NftController extends Controller
      */
     public function show($id)
     {
-        $nftinfo = NFT::where('id', $id)->first();
+        $nftinfo = NFT::where('id', $id)->firstOrFail();
         $nftinfo->collection_name = Collections::where('id',$nftinfo->collection_id)->pluck('name')->firstOrFail();
         $nftinfo->owner_name = User::where('id',$nftinfo->owner)->pluck('name')->firstOrFail();
         $nftinfo->price = NftListings::where('nft',$nftinfo->id)->pluck('price')->first();
