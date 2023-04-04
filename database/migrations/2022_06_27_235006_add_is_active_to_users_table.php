@@ -26,9 +26,6 @@ class AddIsActiveToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
-            $table->dropColumn('is_active');
-            $table->dropColumn('admin');
-        });
+        Schema::dropIfExists('users');
     }
 }
