@@ -33,9 +33,9 @@ a {
 }
 
 .border-top {
-	border-top: 1px solid #383838;
+	border-top: 1px solid rgb(45, 127, 160);
 	border-top-right-radius: 5px;
-	box-shadow: 2px -2px 3px rgba(56, 56, 56, 0.3);
+	box-shadow: 2px -2px 3px rgba(45, 127, 160, 0.3);
 }
 
 
@@ -594,6 +594,12 @@ a {
 	font-size: 100%;
 	cursor: pointer;
 	margin-top: 10px;
+}
+
+.nftinfo-block button {
+	background-color: rgb(60, 171, 214);
+	border: none;
+	border-radius: 5px;
 }
 
 /* Comments in view NFT */

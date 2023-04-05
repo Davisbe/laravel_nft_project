@@ -168,15 +168,6 @@
 
 							@empty
 							<div class="comment-wrapper">
-								<div class="comment-info">
-
-									<div class="comment-owner">
-									</div>
-									<div class="comment-date">
-									</div>
-
-								</div>
-
 								<div class="comment-body">
 									<p>No comments yet.</p>
 								</div>
