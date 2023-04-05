@@ -38,12 +38,12 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
         Route::get('nft/listing/update/{id}', [ListingController::class, 'update_listing']);
         Route::get('nft/listing/remove/{id}', [ListingController::class, 'remove']);
 
-        Route::get('/auth/login', [UserAuth::class, 'login']);
-        Route::get('/auth/register', [UserAuth::class, 'register']);
+        Route::get('/auth/login', [UserAuth::class, 'login'])->middleware('throttle:5,1');
+        Route::get('/auth/register', [UserAuth::class, 'register'])->middleware('throttle:10,1');
         Route::get('/auth/logout', [UserAuth::class, 'logout'])->name('auth.logout');
         Route::get('nft/listing/transaction/{id}', [ListingController::class, 'transaction']);
         Route::get('collection/view/new/purchace/{id}', [CollectionController::class, 'buy_new']);
-        Route::post('comments/{nft_id}', [CommentController::class, 'store']);
+        Route::post('comments/{nft_id}', [CommentController::class, 'store'])->middleware('throttle:6,2');
     });
 
     Route::group(['middleware'=>['EnsureIfAdmin']], function () {

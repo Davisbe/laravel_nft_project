@@ -51,20 +51,18 @@ class UserAuth extends Controller
             'password'=>$request->password
         ];
 
-        if (!$userinfo){
-            return back()->with('fail','User with provided email not found');
+
+        if ($userinfo and Hash::check($request->password, $userinfo->password) and Auth::attempt($credentials)) {
+            $request->session()->put('LoggedUser', $userinfo->id);
+
+            $userinfo->is_active = 1;
+            $userinfo->save();
+
+            return redirect('/');
         } else{
-            if (Hash::check($request->password, $userinfo->password) and Auth::attempt($credentials)) {
-                $request->session()->put('LoggedUser', $userinfo->id);
-
-                $userinfo->is_active = 1;
-                $userinfo->save();
-
-                return redirect('/');
-            } else{
-                return back()->with('fail', 'Incorrect password');
-            }
+            return back()->with('fail', 'Incorrect email/password.');
         }
+
     }
 
     function logout() {
