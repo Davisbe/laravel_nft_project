@@ -17,7 +17,8 @@ class GlobalCheck
      */
     public function handle(Request $request, Closure $next)
     {
-
+        $request->headers->remove('referer');
+        
         if (Auth::check() && (Auth::user()->is_active == 0)) {
             return redirect('auth/logout');
         }

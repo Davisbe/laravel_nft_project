@@ -108,9 +108,11 @@ a {
 .img-container {
 	width: 10%;
 	min-width: 90px;
+	max-width: 162px;
 	height: 80%;
 	margin: auto;
 	display: inline-block;
+	align-items: start;
 }
 
 .page-logo {
