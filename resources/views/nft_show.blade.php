@@ -121,7 +121,7 @@
 											Bought by <a href="{{ url('profile/user/'.$record->user) }}" title="">{{$record->user_name}}</a> for ${{$record->price}}
 										</div>
 										<div class="nft-history-date">
-											{{$record->created_at}}
+											{{$record->created_at->format('d/m/y H:i:s')}}
 										</div>
 									</li>
 								@endforeach
@@ -129,9 +129,9 @@
 						</div>
 						@endif
 
-						@if (Auth::check())
 						<div class="nftinfo-block" id="comments">
 			            	<h2>Comments</h2>
+							@if (Auth::check())
 							<div class="comment-wrapper-new">
 								<form id="auth-form" accept-charset="utf-8" action="{{ url('comments/'.$nftinfo->id) }}" method="POST">
 									@csrf
@@ -144,6 +144,7 @@
 									</button>
 								</form>
 							</div>
+							@endif
 
 							@forelse ($nftinfo->comments as $comment)
 							<div class="comment-wrapper">
@@ -151,11 +152,11 @@
 
 									<div class="comment-owner">
 										@if ($comment->user)
-											{{ $comment->user->name }}
+										<a href="{{ url('profile/user/'.$comment->user->id) }}" title="">{{ $comment->user->name }}</a>
 										@endif
 									</div>
 									<div class="comment-date">
-										{{ $comment->created_at->format('d-m-y') }}
+										{{ $comment->created_at->format('d/m/y') }}
 									</div>
 
 								</div>
@@ -177,8 +178,6 @@
 
 							
 						</div>
-
-						@endif
 
 					</div>
 				</div>
