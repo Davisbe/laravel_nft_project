@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 
 class UserAuth extends Controller
 {
@@ -40,6 +41,32 @@ class UserAuth extends Controller
     }
 
     function check(Request $request) {
+        $key = 'login.' . $request->ip();
+
+        # After first 6 failed attempts in 60 seconds,
+        # 'fallback' values are used to further prevent brute force
+        $limits = [
+            'default' => [
+                'max_attempts' => 6,
+                'decay_time' => 60
+            ],
+            'fallback' => [
+                'max_attempts' => 3,
+                'decay_time' => 60
+            ]
+        ];
+
+        if (RateLimiter::tooManyAttempts($key, $limits['fallback']['max_attempts'])) {
+            $limit = $limits['fallback'];
+        } else {
+            $limit = $limits['default'];
+        }
+
+        if (RateLimiter::tooManyAttempts($key, $limit['max_attempts'])) {
+            $retryAfter = RateLimiter::availableIn($key);
+            return back()->with('fail', 'Too many login attempts. Please try again in ' . $retryAfter . ' seconds.');
+        }
+        
         $request->validate([
             'email'=>'required|email',
             'password'=>'required|min:8|max:30'
@@ -57,9 +84,11 @@ class UserAuth extends Controller
 
             $userinfo->is_active = 1;
             $userinfo->save();
-
+            
+            RateLimiter::clear($key);
             return redirect('/');
         } else{
+            RateLimiter::hit($key);
             return back()->with('fail', 'Incorrect email/password.');
         }
 
