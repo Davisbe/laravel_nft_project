@@ -36,7 +36,6 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
         Route::get('nft/listing/update/{id}', [ListingController::class, 'update_listing']);
         Route::get('nft/listing/remove/{id}', [ListingController::class, 'remove']);
 
-        Route::get('/auth/logout', [UserAuth::class, 'logout'])->name('auth.logout');
         Route::get('nft/listing/transaction/{id}', [ListingController::class, 'transaction']);
         Route::get('collection/view/new/purchace/{id}', [CollectionController::class, 'buy_new']);
         Route::post('comments/{nft_id}', [CommentController::class, 'store'])->middleware('throttle:12,1');
@@ -64,6 +63,7 @@ Route::group(['middleware'=>['GlobalCheck']], function () {
     Route::get('/auth/register', [UserAuth::class, 'register'])->middleware('throttle:12,1')->name('register');
     Route::post('/auth/save', [UserAuth::class, 'save'])->name('auth.save');
     Route::post('/auth/check', [UserAuth::class, 'check'])->name('auth.check');
+    Route::get('/auth/logout', [UserAuth::class, 'logout'])->name('auth.logout');
     
     Route::get('/email/verify', function () {
         return view('auth.verify-email');
