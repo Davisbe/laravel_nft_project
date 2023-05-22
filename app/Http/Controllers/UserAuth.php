@@ -7,18 +7,31 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Auth\Events\Registered;
 
 class UserAuth extends Controller
 {
     function login() {
+        if (Auth::check()) {
+            return back();
+        }
+
         return view('login');
     }
 
     function register() {
+        if (Auth::check()) {
+            return back();
+        }
+
         return view('sign_up');
     }
 
     function save(Request $request) {
+        if (Auth::check()) {
+            return back();
+        }
+
         $request->validate([
             'name'=>'required|min:5|max:15',
             'email'=>'required|email|unique:users',
@@ -33,7 +46,8 @@ class UserAuth extends Controller
         $save = $user->save();
 
         if ($save) {
-            return redirect('auth/login')->with('success', 'Profile created! You can now log in.');
+            event(new Registered($user));
+            return redirect('auth/login')->with('success', 'Profile created! Log in first and then verify your email.');
         }
         else {
             return back()->with('fail','Something went wrong, try again later');
@@ -41,6 +55,10 @@ class UserAuth extends Controller
     }
 
     function check(Request $request) {
+        if (Auth::check()) {
+            return back();
+        }
+
         $key = 'login.' . $request->ip();
 
         # After first 6 failed attempts in 60 seconds,

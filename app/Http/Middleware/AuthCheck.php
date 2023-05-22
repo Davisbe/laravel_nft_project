@@ -17,15 +17,8 @@ class AuthCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() and ($request->path() == 'auth/login' or $request->path() == 'auth/register')) {
-            return back();
-        }
 
-        if (!Auth::check() and ($request->is('nft/listing/*'))) {
-            return response()->view('login');
-        }
-
-        if (!Auth::check() and ($request->is('collection/view/new/purchace/*'))) {
+        if (!Auth::check()) {
             return response()->view('login');
         }
 
