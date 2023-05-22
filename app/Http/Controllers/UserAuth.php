@@ -35,7 +35,7 @@ class UserAuth extends Controller
         $request->validate([
             'name'=>'required|min:5|max:15',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:8|max:30',
+            'password'=>'required|min:12|max:40',
             'password_confirm'=>'required|in:'.$request->password
         ]);
 
